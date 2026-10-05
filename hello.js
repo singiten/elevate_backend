@@ -61,7 +61,7 @@ console.log('Writing in background...');
 // Output:
 // Writing in background...
 // File written successfully!
-*/
+
 const fs = require('fs');
 
 // Async - Non-blocking
@@ -79,3 +79,4 @@ console.log(' Reading in background...');
 // Output:
 // Reading in background...
 //  File Content: Hello from elevate!
+*/
