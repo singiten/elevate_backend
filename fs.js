@@ -1,7 +1,7 @@
 
 const fs = require('fs');
 
-/*
+
 // Async - Non-blocking
 fs.writeFile('elevate.txt', 'Hello from elevate!', 'utf8', (err) => {
   if (err) {
@@ -17,8 +17,8 @@ console.log('Writing in background...');
 // Writing in background...
 // File written successfully!
 
-*/
 
+/*
 // Async - Non-blocking
 fs.readFile('elevate.txt', 'utf8', (err, data) => {
   if (err) {
@@ -29,7 +29,7 @@ fs.readFile('elevate.txt', 'utf8', (err, data) => {
 });
 
 console.log(' Reading in background...');
-
+*/
 // If elevate.txt contains "Hello from elevate!"
 // Output:
 // Reading in background...

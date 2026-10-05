@@ -1,17 +1,18 @@
-/*
-// arrow functions
 
+// arrow functions
+const greet = (name) => {
+return "Hello " + name;
+};
+let result = greet("singiten");
+console.log(result);
+/*
 function greet(name) {
 return "Hello " + name;
 }
  let result= greet("singiten");
 console.log(result);
 
-const greet = (name) => {
-return "Hello " + name;
-};
-let result = greet("singiten");
-console.log(result);
+
 
 // Template Literals
 const name = "Abebe";
