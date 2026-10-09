@@ -1,16 +1,28 @@
-
-// 1. Import Express
 const express = require('express');
-
-// 2. Create an Express application
 const app = express();
 
-// 3. Define a route so the server does something
-app.get('/', (req, res) => {
-    res.send('Server is alive!');
+app.use(express.json());
+
+// GET - Read
+app.get('/books', (req, res) => {
+    res.send('Getting all books');
 });
 
-// 4. Start the server
+// POST - Create
+app.post('/books', (req, res) => {
+    res.send('Creating a new book');
+});
+
+// PUT - Update
+app.put('/books', (req, res) => {
+    res.send('Updating a book');
+});
+
+// DELETE - Delete
+app.delete('/books', (req, res) => {
+    res.send('Deleting a book');
+});
+
 app.listen(3000, () => {
-    console.log('Listening on port 3000');
+    console.log('Server running on port 3000');
 });
