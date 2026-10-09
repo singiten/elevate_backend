@@ -88,3 +88,121 @@ app.listen(3000, () => {
 });
 */
 //middleware
+/*
+const express = require('express');
+const app = express();
+
+app.use(express.json());
+
+// Custom Middleware
+const checkAuth = (req, res, next) => {
+    console.log('Middleware running...');
+    if (req.query.admin === 'true') {
+        next(); // Continue
+    } else {
+        res.status(403).json({ error: 'Access Denied' });
+    }
+};
+
+// Public route
+app.get('/', (req, res) => {
+    res.send('Public page');
+});
+
+// Protected route with middleware
+app.get('/dashboard', checkAuth, (req, res) => {
+    res.send('Welcome to the secret dashboard!');
+});
+
+app.listen(3000, () => {
+    console.log('Server running on port 3000');
+});
+*/
+
+// all together
+const express = require('express');
+const app = express();
+
+app.use(express.json());
+
+// In-memory database
+let students = [
+    { id: 1, name: 'Abebe', age: 20, course: 'Web Dev' },
+    { id: 2, name: 'Beyene', age: 22, course: 'Data Science' }
+];
+let nextId = 3;
+
+// Logger Middleware
+app.use((req, res, next) => {
+    console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+    next();
+});
+
+// GET all students
+app.get('/api/students', (req, res) => {
+    res.status(200).json(students);
+});
+
+// GET one student
+app.get('/api/students/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const student = students.find(s => s.id === id);
+    
+    if (!student) {
+        return res.status(404).json({ error: 'Student not found' });
+    }
+    res.status(200).json(student);
+});
+
+// CREATE student
+app.post('/api/students', (req, res) => {
+    const { name, age, course } = req.body;
+    
+    if (!name || !age || !course) {
+        return res.status(400).json({ error: 'Missing required fields' });
+    }
+    
+    const newStudent = {
+        id: nextId++,
+        name,
+        age: parseInt(age),
+        course
+    };
+    
+    students.push(newStudent);
+    res.status(201).json(newStudent);
+});
+
+// UPDATE student
+app.put('/api/students/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const student = students.find(s => s.id === id);
+    
+    if (!student) {
+        return res.status(404).json({ error: 'Student not found' });
+    }
+    
+    const { name, age, course } = req.body;
+    if (name) student.name = name;
+    if (age) student.age = parseInt(age);
+    if (course) student.course = course;
+    
+    res.status(200).json(student);
+});
+
+// DELETE student
+app.delete('/api/students/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const index = students.findIndex(s => s.id === id);
+    
+    if (index === -1) {
+        return res.status(404).json({ error: 'Student not found' });
+    }
+    
+    students.splice(index, 1);
+    res.status(204).send();
+});
+
+app.listen(3000, () => {
+    console.log('Student API running on port 3000');
+});
