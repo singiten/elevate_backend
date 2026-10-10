@@ -1,3 +1,4 @@
+// CRUD operations
 /*
 const express = require('express');
 const app = express();
@@ -118,7 +119,7 @@ app.listen(3000, () => {
     console.log('Server running on port 3000');
 });
 */
-/*
+
 // all together
 const express = require('express');
 const app = express();
@@ -206,4 +207,3 @@ app.delete('/api/students/:id', (req, res) => {
 app.listen(3000, () => {
     console.log('Student API running on port 3000');
 });
-*/
